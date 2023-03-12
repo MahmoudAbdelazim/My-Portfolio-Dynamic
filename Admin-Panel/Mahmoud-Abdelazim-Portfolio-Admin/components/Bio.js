@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 const Bio = ({ selectedSection }) => {
   const [bio, setBio] = useState({ name: "", mainBio: "", detailedBio: "" });
+  const [msg, setMsg] = useState("");
 
   const updateBio = (newBio) => {
     setBio(newBio);
@@ -44,7 +45,11 @@ const Bio = ({ selectedSection }) => {
 
     fetch(process.env.baseIp + "/bio", requestOptions)
       .then((response) => response.text())
-      .then((result) => console.log(result))
+      .then((result) => {
+        console.log(result);
+        setMsg("Data Saved Successfully");
+        setTimeout(() => setMsg(""), 2000);
+      })
       .catch((error) => console.log("error", error));
   };
 
@@ -54,7 +59,7 @@ const Bio = ({ selectedSection }) => {
       style={{ display: selectedSection === "bio" ? "block" : "none" }}
     >
       <h2>Bio</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="form-group">
         <label htmlFor="name">Name: </label>
         <input
           type={"text"}
@@ -62,6 +67,7 @@ const Bio = ({ selectedSection }) => {
           id="name"
           value={bio.name}
           onChange={handleChange}
+          className="form-control"
         />
 
         <label htmlFor="mainBio">Main Bio: </label>
@@ -71,6 +77,7 @@ const Bio = ({ selectedSection }) => {
           id="mainBio"
           value={bio.mainBio}
           onChange={handleChange}
+          className="form-control"
         />
 
         <label htmlFor="detailedBio">Detailed Bio: </label>
@@ -80,9 +87,11 @@ const Bio = ({ selectedSection }) => {
           id="detailedBio"
           value={bio.detailedBio}
           onChange={handleChange}
+          className="form-control"
         />
-        <input type={"submit"} value="Save"></input>
+        <input type={"submit"} value="Save" className="btn btn-primary" />
       </form>
+      <p className="text-success">{msg}</p>
     </div>
   );
 };

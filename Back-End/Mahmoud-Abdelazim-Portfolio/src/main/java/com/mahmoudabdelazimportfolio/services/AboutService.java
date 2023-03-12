@@ -22,7 +22,7 @@ public class AboutService {
     }
 
     public void updateAbout(About about) {
-        aboutRepository.deleteAll();
+//        aboutRepository.deleteAll();
         aboutRepository.saveAndFlush(about);
     }
 }
