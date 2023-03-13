@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
+import ExperienceItem from "./ExperienceItem";
 
 const Experience = ({ selectedSection }) => {
   const [experience, setExperience] = useState([]);
+  const [msg, setMsg] = useState("");
 
   const updateExperience = (newExperience) => {
     setExperience(newExperience);
   };
 
-  useEffect(() => {
+  const fetchExperience = () => {
     let requestOptions = {
       method: "GET",
       redirect: "follow",
@@ -20,14 +22,86 @@ const Experience = ({ selectedSection }) => {
         updateExperience(JSON.parse(result));
       })
       .catch((error) => console.log("error", error));
+  };
+
+  useEffect(() => {
+    fetchExperience();
   }, []);
 
-  const handleChange = (e) => {
-    const value = e.target.value;
-    setExperience({
-      ...experience,
-      [e.target.name]: value,
-    });
+  const updateExistingExperience = (exp, e) => {
+    e.preventDefault();
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify(exp);
+
+    var requestOptions = {
+      method: "PUT",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
+
+    fetch(process.env.baseIp + "/experience", requestOptions)
+      .then((response) => response.text())
+      .then((result) => {
+        console.log(result);
+        setMsg("Experience Saved Successfully!");
+        setTimeout(() => setMsg(""), 2000);
+      })
+      .catch((error) => console.log("error", error));
+  };
+
+  const addNewExperience = (exp, e) => {
+    e.preventDefault();
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify(exp);
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
+
+    fetch(process.env.baseIp + "/experience", requestOptions)
+      .then((response) => response.text())
+      .then((result) => {
+        console.log(result);
+        fetchExperience();
+      })
+      .catch((error) => console.log("error", error));
+  };
+
+  const saveExperience = (exp, e) => {
+    if (exp.id) {
+      updateExistingExperience(exp, e);
+    } else {
+      addNewExperience(exp, e);
+    }
+  };
+
+  const deleteExperience = (exp, e) => {
+    e.preventDefault();
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify(exp);
+    var requestOptions = {
+      method: "DELETE",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
+
+    fetch(process.env.baseIp + "/experience", requestOptions)
+      .then((response) => response.text())
+      .then((result) => {
+        console.log(result);
+        fetchExperience();
+      })
+      .catch((error) => console.log("error", error));
   };
 
   return (
@@ -37,71 +111,28 @@ const Experience = ({ selectedSection }) => {
     >
       <h2>Experience</h2>
       <div>
-        {experience.map((exp) => {
+        {experience.map((expItem) => {
           return (
-            <form key={exp.id}>
-              <label htmlFor="companyName">Company: </label>
-              <input
-                type={"text"}
-                name="companyName"
-                id="companyName"
-                value={exp.companyName}
-                onChange={handleChange}
-              />
-
-              <label htmlFor="companyLink">Company Link: </label>
-              <input
-                type={"text"}
-                name="companyLink"
-                id="companyLink"
-                value={exp.companyLink}
-                onChange={handleChange}
-              />
-
-              <label htmlFor="title">Title: </label>
-              <input
-                type={"text"}
-                name="title"
-                id="title"
-                value={exp.title}
-                onChange={handleChange}
-              />
-
-              <label htmlFor="dateFrom">From: </label>
-              <input
-                type={"date"}
-                name="dateFrom"
-                id="dateFrom"
-                value={exp.dateFrom}
-                onChange={handleChange}
-              />
-
-              <label htmlFor="dateTo">To: </label>
-              <input
-                type={"date"}
-                name="dateTo"
-                id="dateTo"
-                value={exp.dateTo}
-                onChange={handleChange}
-              />
-
-              <h5>Responsiblities</h5>
-              <div>
-                {exp.responsibilities.map((responsibility) => {
-                  return (
-                    <input
-                      key={responsibility.id}
-                      type={"text"}
-                      name="responsibility"
-                      value={responsibility.responsibility}
-                      onChange={handleChange}
-                    />
-                  );
-                })}
-              </div>
-            </form>
+            <ExperienceItem
+              key={expItem.id}
+              expItem={expItem}
+              saveExperience={saveExperience}
+              deleteExperience={deleteExperience}
+              msg={msg}
+            />
           );
         })}
+        <ExperienceItem
+          expItem={{
+            companyName: "",
+            companyLink: "",
+            title: "",
+            dateFrom: null,
+            dateTo: null,
+            responsibilities: [],
+          }}
+          saveExperience={saveExperience}
+        />
       </div>
     </div>
   );

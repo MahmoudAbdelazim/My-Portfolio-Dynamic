@@ -11,5 +11,6 @@ public class Responsibility {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(length = 1000)
     private String responsibility;
 }

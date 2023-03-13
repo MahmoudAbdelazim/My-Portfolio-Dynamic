@@ -34,39 +34,6 @@ const NavList = ({selectedSection, setSelectedSection}) => {
       >
         Experience
       </a>
-      <a
-        className={
-          selectedSection === "projects"
-            ? " nav-item nav-link active"
-            : "nav-item nav-link"
-        }
-        href="#projects"
-        onClick={() => setSelectedSection("projects")}
-      >
-        Projects
-      </a>
-      <a
-        className={
-          selectedSection === "achievements"
-            ? " nav-item nav-link active"
-            : "nav-item nav-link"
-        }
-        href="#achievements"
-        onClick={() => setSelectedSection("achievements")}
-      >
-        Achievements
-      </a>
-      <a
-        className={
-          selectedSection === "social"
-            ? " nav-item nav-link active"
-            : "nav-item nav-link"
-        }
-        href="#social"
-        onClick={() => setSelectedSection("social")}
-      >
-        Social
-      </a>
     </nav>
   );
 };

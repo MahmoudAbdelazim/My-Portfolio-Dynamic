@@ -1,4 +1,119 @@
 body {
   text-align: center;
-  padding-top: 50px;
+  background-color: rgb(0, 23, 47);
+  color: #ccebff;
+  font-family: "Work Sans", sans-serif;
+}
+
+p {
+  color: #96a1c2;
+}
+
+li {
+  color: #96a1c2;
+}
+
+.navbar {
+  background-color: rgb(0, 23, 47) !important;
+  padding-left: 70px;
+  padding-top: 40px;
+}
+
+.nav-item .nav-link {
+  color: #96a1c2 !important;
+  padding-right: 40px !important;
+}
+
+.landing {
+  text-align: left;
+  padding: 0 20%;
+  padding-top: 150px;
+  height: 100vh;
+}
+
+.landing-p {
+  color: #64ffda;
+}
+
+.landing-name {
+  font-size: 400%;
+  font-weight: bold;
+}
+
+.main-bio {
+  font-size: 300%;
+  font-weight: bold;
+  margin-bottom: 30px;
+  color: rgba(204, 235, 255, 0.697);
+}
+
+/* ------------------------------------------------------------ */
+
+.about {
+  height: 85vh;
+  text-align: left;
+  padding: 0 20%;
+}
+
+.section-head {
+  font-size: 250%;
+  margin-bottom: 30px;
+  font-weight: bold;
+}
+
+.about-left {
+  display: inline-block;
+  width: 60%;
+}
+
+.technology {
+  color: #64ffda;
+}
+
+.my-image {
+  width: 250px;
+  border-radius: 100%;
+  vertical-align: top;
+  margin-top: 50px;
+  margin-left: 100px;
+  box-shadow: 10px 10px 5px #21574a;
+  -moz-box-shadow: 10px 10px 5px #21574a;
+  -webkit-box-shadow: 10px 10px 5px #21574a;
+  -khtml-box-shadow: 10px 10px 5px #21574a;
+}
+
+/* ---------------------------------------------------------------- */
+
+.experience {
+  text-align: left;
+  padding: 0 20%;
+}
+
+.companyLink {
+  color: #64ffda;
+  text-decoration: none;
+}
+
+.companyLink:hover {
+  color: #46c2a5;
+}
+
+.work {
+  margin-top: 50px;
+  padding: 0 5%;
+}
+
+.work:nth-child(even) {
+  text-align: left;
+}
+
+.work:nth-child(odd) {
+  text-align: left;
+}
+
+
+/* ------------------------------------------------------------------ */
+
+.footer {
+  padding: 30px 0;
 }

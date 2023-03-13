@@ -144,7 +144,7 @@ const About = ({ selectedSection }) => {
                   className="form-control"
                   value={newTechnology.technology}
                   onChange={(e) =>
-                    setNewTechnology({ id: 0, technology: e.target.value })
+                    setNewTechnology({ technology: e.target.value })
                   }
                 />
               </div>

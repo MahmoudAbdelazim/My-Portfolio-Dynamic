@@ -1,6 +1,7 @@
 package com.mahmoudabdelazimportfolio.services;
 
 import com.mahmoudabdelazimportfolio.model.About;
+import com.mahmoudabdelazimportfolio.model.Technology;
 import com.mahmoudabdelazimportfolio.respositories.AboutRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,14 @@ public class AboutService {
     }
 
     public void updateAbout(About about) {
-//        aboutRepository.deleteAll();
-        aboutRepository.saveAndFlush(about);
+        List<About> abouts = aboutRepository.findAll();
+        if (abouts.isEmpty()) {
+            aboutRepository.saveAndFlush(about);
+            return;
+        }
+        About origAbout = abouts.get(0);
+        origAbout.setAboutText(about.getAboutText());
+        origAbout.setTechnologies(about.getTechnologies());
+        aboutRepository.saveAndFlush(origAbout);
     }
 }

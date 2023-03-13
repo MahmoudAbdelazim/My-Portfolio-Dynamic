@@ -2,7 +2,6 @@ package com.mahmoudabdelazimportfolio.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.hibernate.annotations.Cascade;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +14,7 @@ public class About {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(length = 4000)
     private String aboutText;
 
     @OneToMany(cascade = CascadeType.ALL)

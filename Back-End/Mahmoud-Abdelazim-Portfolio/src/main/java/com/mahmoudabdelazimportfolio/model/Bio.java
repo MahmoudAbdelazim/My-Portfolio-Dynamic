@@ -13,7 +13,9 @@ public class Bio {
 
     private String name;
 
+    @Column(length = 1000)
     private String mainBio;
 
+    @Column(length = 4000)
     private String detailedBio;
 }

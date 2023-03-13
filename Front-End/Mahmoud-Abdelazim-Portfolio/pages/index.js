@@ -1,8 +1,16 @@
-const IndexPage = () => {
+import About from "../components/About";
+import Experience from "../components/Experience";
+import Landing from "../components/Landing";
+import Nav from "../components/Nav";
 
+const IndexPage = () => {
   return (
     <>
-      <h1>Mahmoud Abdelazim's Portfolio</h1>
+      <Nav />
+      <Landing />
+      <About />
+      <Experience />
+      <div className="footer">&copy; Built By Mahmoud Abdelazim</div>
     </>
   );
 };

@@ -7,9 +7,20 @@ body {
   margin-bottom: 50px;
 }
 
-form {
+.card, form{
   text-align: left;
   width: 50%;
+  margin: auto;
+  padding-top: 30px;
+}
+
+.card {
+  margin-bottom: 30px;
+}
+
+.card form {
+  width: 80%;
+  text-align: left;
   margin: auto;
 }
 
